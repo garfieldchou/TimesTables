@@ -12,13 +12,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SeekBar mySeekBar = (SeekBar) findViewById(R.id.mySeekBar);
+        final SeekBar mySeekBar = (SeekBar) findViewById(R.id.mySeekBar);
         mySeekBar.setMax(20);
+        mySeekBar.setProgress(10);
 
         mySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                Log.i("base", Integer.toString(i));
+                int min = 1;
+                int timesTable;
+
+                if (i < min) {
+                    timesTable = min;
+                    mySeekBar.setProgress(min);
+                } else {
+                    timesTable = i;
+                }
+                Log.i("base", Integer.toString(timesTable));
             }
 
             @Override
