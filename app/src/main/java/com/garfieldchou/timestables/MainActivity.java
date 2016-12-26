@@ -19,12 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final SeekBar mySeekBar = (SeekBar) findViewById(R.id.mySeekBar);
-        ListView timestables = (ListView) findViewById(R.id.timesTables);
+        final ListView timestables = (ListView) findViewById(R.id.timesTables);
         mySeekBar.setMax(20);
         mySeekBar.setProgress(10);
 
-        ArrayList<String> arrayTimesRes = new ArrayList<String>(asList("0", "0", "0", "0", "0", "0", "0", "0", "0"));
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayTimesRes);
+        final ArrayList<String> arrayTimesRes = new ArrayList<String>(asList("0", "0", "0", "0", "0", "0", "0", "0", "0"));
+        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayTimesRes);
         timestables.setAdapter(arrayAdapter);
 
         mySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
                     timesTable = i;
                 }
                 Log.i("base", Integer.toString(timesTable));
+                for(int j = 0; j < arrayTimesRes.size(); j++) {
+                    arrayTimesRes.set(j, Integer.toString(timesTable * (j+1)));
+                }
+                timestables.setAdapter(arrayAdapter);
             }
 
             @Override
